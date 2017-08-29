@@ -3,6 +3,7 @@ package com.mobile.anime.animerecommendations
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -28,6 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..2) {
             swipeView.addView(AnimeCard(this, swipeView))
+        }
+
+        cancel_button.setOnClickListener{
+            swipeView.doSwipe(false)
+        }
+
+        heart_button.setOnClickListener {
+            swipeView.doSwipe(true)
         }
     }
 
