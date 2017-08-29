@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import com.mindorks.placeholderview.SwipeDecor
 import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.SwipeViewBuilder
+import com.mobile.anime.animerecommendations.view.AnimeCard
 import kotlinx.android.synthetic.main.card_view_layout.view.*
 import kotlinx.android.synthetic.main.content_main.view.*
 
@@ -20,15 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        swipeView.getBuilder<SwipePlaceHolderView, SwipeViewBuilder<SwipePlaceHolderView>>()
-                .setDisplayViewCount(3)
+        val swipeViewBuilder : SwipeViewBuilder<SwipePlaceHolderView> = swipeView.getBuilder()
+        swipeViewBuilder.setDisplayViewCount(3)
+                .setSwipeDecor(SwipeDecor().setPaddingTop(0)
+                        .setRelativeScale(0.01f))
 
-        val layoutInflaer = layoutInflater
-
-        for (i in 0..3) {
-            val view = layoutInflaer.inflate(R.layout.card_view_layout, null)
-            view.title.setText(i.toString())
-            swipeView.addView(view)
+        for (i in 0..2) {
+            swipeView.addView(AnimeCard(this, swipeView))
         }
     }
 
