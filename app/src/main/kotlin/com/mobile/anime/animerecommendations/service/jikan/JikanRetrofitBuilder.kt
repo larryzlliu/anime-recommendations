@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 object JikanRetrofitBuilder {
-    val JIKAN_API_URL : String = "https://jikan.me/api/v1.1/"
+    val JIKAN_API_URL : String = "https://jikan.me"
 
     val retrofit: Retrofit
         get() {

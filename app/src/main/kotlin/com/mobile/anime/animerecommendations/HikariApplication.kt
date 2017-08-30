@@ -22,21 +22,15 @@ class HikariApplication : Application() {
     @Inject
     lateinit var serviceManager : ServiceManager
 
-    val component: HikariComponent by lazy {
-        DaggerHikariComponent
-                .builder()
-                .hikariModule(HikariModule(this))
-                .build()
-    }
+    var component: HikariComponent? = null
 
     override fun onCreate() {
         super.onCreate()
-        app = this
-        component!!.inject(this)
-    }
+        component = DaggerHikariComponent
+                    .builder()
+                    .hikariModule(HikariModule(this))
+                    .build()
 
-    companion object {
-        var app: HikariApplication? = null
-            private set
+        component!!.inject(this)
     }
 }
