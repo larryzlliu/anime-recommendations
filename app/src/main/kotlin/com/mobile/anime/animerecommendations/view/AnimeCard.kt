@@ -1,7 +1,6 @@
 package com.mobile.anime.animerecommendations.view
 
 import android.content.Context
-import android.util.Log
 import android.widget.TextView
 import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.annotations.Layout
@@ -15,16 +14,18 @@ import com.mobile.anime.animerecommendations.R
  * Created by rww306 on 2017-08-28.
  */
 @Layout(R.layout.card_view_layout)
-class AnimeCard (context : Context, swipeView : SwipePlaceHolderView){
+class AnimeCard (context : Context, swipeView : SwipePlaceHolderView, id : Int){
     @View(R.id.title)
-    var title : TextView? = null
+    private var title : TextView? = null
 
     private var context : Context? = null
     private var swipeView : SwipePlaceHolderView? = null
+    private var id = 0
 
     init {
         this.context = context
         this.swipeView = swipeView
+        this.id = id
     }
 
     @Resolve

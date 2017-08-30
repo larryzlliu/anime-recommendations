@@ -1,9 +1,7 @@
 package com.mobile.anime.animerecommendations
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -11,11 +9,11 @@ import com.mindorks.placeholderview.SwipeDecor
 import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.SwipeViewBuilder
 import com.mobile.anime.animerecommendations.view.AnimeCard
-import kotlinx.android.synthetic.main.card_view_layout.view.*
-import kotlinx.android.synthetic.main.content_main.view.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var testList : ArrayList<Int>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +25,14 @@ class MainActivity : AppCompatActivity() {
                 .setSwipeDecor(SwipeDecor().setPaddingTop(0)
                         .setRelativeScale(0.01f))
 
-        for (i in 0..2) {
-            swipeView.addView(AnimeCard(this, swipeView))
+        testList = ArrayList()
+        testList!!.add(1)
+        testList!!.add(9253)
+        testList!!.add(32281)
+        testList!!.add(1575)
+
+        testList!!.forEach { i ->
+            swipeView.addView(AnimeCard(this, swipeView, i))
         }
 
         cancel_button.setOnClickListener{
