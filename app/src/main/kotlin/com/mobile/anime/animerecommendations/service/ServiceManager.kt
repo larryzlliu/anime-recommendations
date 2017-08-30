@@ -37,7 +37,9 @@ class ServiceManager public @Inject constructor(bus : Bus){
         call.enqueue(object : Callback<JikanAnimeResponse> {
 
             override fun onResponse(call : Call<JikanAnimeResponse>, response: Response<JikanAnimeResponse>) {
-                bus!!.post(response.body())
+                if (response.body() != null) {
+                    bus!!.post(response.body())
+                }
             }
 
             override fun onFailure(call : Call<JikanAnimeResponse>, t : Throwable) {

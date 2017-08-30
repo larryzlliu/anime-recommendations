@@ -13,6 +13,6 @@ import retrofit2.http.Path
  */
 
 interface JikanServices {
-    @GET("/api/v1.1/anime/{id}")
+    @GET("/api/anime/{id}")
     fun getAnimeById(@Path("id") id : Int): Call<JikanAnimeResponse>
 }

@@ -5,10 +5,7 @@ package com.mobile.anime.animerecommendations.service.response
  */
 
 class JikanAnimeResponse {
-    private var title : String? = null
-    private var synopsis : String? = null
-
-    fun getTitle(): String {
-        return title!!
-    }
+    var title : String? = null
+    var synopsis : String? = null
+    var image : String? = null
 }

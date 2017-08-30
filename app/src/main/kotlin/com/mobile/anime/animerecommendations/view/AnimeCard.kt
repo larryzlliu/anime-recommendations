@@ -2,6 +2,7 @@ package com.mobile.anime.animerecommendations.view
 
 import android.app.Activity
 import android.content.Context
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.mindorks.placeholderview.SwipePlaceHolderView
@@ -16,36 +17,34 @@ import com.mobile.anime.animerecommendations.service.request.JikanAnimeRequest
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 /**
  * Created by rww306 on 2017-08-28.
  */
 @Layout(R.layout.card_view_layout)
-class AnimeCard (context : Activity, swipeView : SwipePlaceHolderView, id : Int){
-
-    @Inject
-    lateinit var bus : Bus
+class AnimeCard (context : Activity, swipeView : SwipePlaceHolderView, anime: JikanAnimeResponse){
 
     @View(R.id.title)
     private var title : TextView? = null
+    @View(R.id.image)
+    private var image : ImageView? = null
 
     private var context : Activity? = null
     private var swipeView : SwipePlaceHolderView? = null
-    private var id = 0
+    private var anime : JikanAnimeResponse? = null
 
     init {
         this.context = context
         this.swipeView = swipeView
-        this.id = id
-        (context.application as HikariApplication).component!!.inject(this)
-        bus.register(this)
+        this.anime = anime
     }
 
     @Resolve
     private fun onResolved() {
-        //set up view here
-        bus.post(JikanAnimeRequest(id))
+        title!!.setText(anime!!.title)
+        Picasso.with(context).load(anime!!.image).into(image)
     }
 
     @SwipeOut
@@ -56,10 +55,5 @@ class AnimeCard (context : Activity, swipeView : SwipePlaceHolderView, id : Int)
     @SwipeIn
     private fun onSwipeIn() {
         swipeView!!.addView(this)
-    }
-
-    @Subscribe
-    public fun onJikanAnimeResponse(response: JikanAnimeResponse) {
-        Toast.makeText(context, "RESPONE!!", Toast.LENGTH_SHORT).show()
     }
 }
