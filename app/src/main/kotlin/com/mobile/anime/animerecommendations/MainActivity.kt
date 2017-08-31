@@ -1,5 +1,6 @@
 package com.mobile.anime.animerecommendations
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
@@ -10,6 +11,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.SwipeViewBuilder
 import com.mobile.anime.animerecommendations.service.request.JikanAnimeRequest
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
+import com.mobile.anime.animerecommendations.util.Tags
 import com.mobile.anime.animerecommendations.view.AnimeCard
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
@@ -57,6 +59,12 @@ class MainActivity : AppCompatActivity() {
     @Subscribe
     public fun onAnimeResponse(response: JikanAnimeResponse) {
         swipeView.addView(AnimeCard(this, swipeView, response))
+    }
+
+    public fun startAnimeActivity(anime : JikanAnimeResponse) {
+        val intent = Intent(this, AnimeDetailsActivity::class.java)
+        intent.putExtra(Tags.ANIME, anime)
+        startActivity(intent)
     }
 
 }
