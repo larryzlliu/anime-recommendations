@@ -5,6 +5,7 @@ import com.mobile.anime.animerecommendations.service.jikan.JikanRetrofitBuilder
 import com.mobile.anime.animerecommendations.service.jikan.JikanServices
 import com.mobile.anime.animerecommendations.service.request.JikanAnimeRequest
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
+import com.mobile.anime.animerecommendations.util.Cache
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
 import retrofit2.Call
@@ -33,11 +34,20 @@ class ServiceManager public @Inject constructor(bus : Bus){
 
     @Subscribe
     public fun onJikanAnimeRequest(request: JikanAnimeRequest) {
+        val cachedResponse = Cache.get(request.id)
+        if (cachedResponse != null) {
+            bus!!.post(cachedResponse)
+            return
+        }
+
         val call : Call<JikanAnimeResponse> = jikanService!!.getAnimeById(request.id)
         call.enqueue(object : Callback<JikanAnimeResponse> {
 
             override fun onResponse(call : Call<JikanAnimeResponse>, response: Response<JikanAnimeResponse>) {
                 if (response.body() != null) {
+                    val body = response.body()
+                    body.id = request.id
+                    Cache.put(request.id, body)
                     bus!!.post(response.body())
                 }
             }

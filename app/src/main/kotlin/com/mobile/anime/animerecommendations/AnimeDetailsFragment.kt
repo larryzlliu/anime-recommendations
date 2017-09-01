@@ -25,6 +25,9 @@ class AnimeDetailsFragment : android.support.v4.app.Fragment() {
         val view = inflater!!.inflate(R.layout.card_details_layout, container, false)
         val anime = arguments.getSerializable(Tags.ANIME) as JikanAnimeResponse
         Picasso.with(context).load(anime.image).into(view.image)
+        view.title.text = anime.title
+        view.description.text = anime.synopsis
+        view.image.setOnClickListener { activity.finish() }
         return view
     }
 }

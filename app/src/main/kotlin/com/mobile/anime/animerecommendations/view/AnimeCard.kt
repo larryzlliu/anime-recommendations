@@ -12,6 +12,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOut
 import com.mobile.anime.animerecommendations.MainActivity
 import com.mobile.anime.animerecommendations.R
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
+import com.mobile.anime.animerecommendations.util.addAnime
 import com.squareup.picasso.Picasso
 
 /**
@@ -56,5 +57,6 @@ class AnimeCard (context : Activity, swipeView : SwipePlaceHolderView, anime : J
     @SwipeIn
     private fun onSwipeIn() {
         swipeView!!.addView(this)
+        addAnime(anime!!.id, context!!)
     }
 }

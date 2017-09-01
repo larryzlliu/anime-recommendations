@@ -12,6 +12,7 @@ import com.mindorks.placeholderview.SwipeViewBuilder
 import com.mobile.anime.animerecommendations.service.request.JikanAnimeRequest
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
 import com.mobile.anime.animerecommendations.util.Tags
+import com.mobile.anime.animerecommendations.util.clearSharedPref
 import com.mobile.anime.animerecommendations.view.AnimeCard
 import com.squareup.otto.Bus
 import com.squareup.otto.Subscribe
@@ -65,6 +66,12 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, AnimeDetailsActivity::class.java)
         intent.putExtra(Tags.ANIME, anime)
         startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //only for testing purposes, clear sharedpref
+        clearSharedPref(this)
     }
 
 }

@@ -10,4 +10,6 @@ class JikanAnimeResponse : Serializable{
     var title : String? = null
     var synopsis : String? = null
     var image : String? = null
+    var id : Int = 0
+        set(value) { field = value }
 }
