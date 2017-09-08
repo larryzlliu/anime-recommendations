@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hikari</string>
     <string name="title_activity_main">Hikari</string>
+    <string name="favourites">Favourites</string>
 </resources>

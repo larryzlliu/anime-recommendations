@@ -19,14 +19,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/main_content">
         <include
             android:id="@+id/card_layout"
             layout="@layout/content_main" />
-    </RelativeLayout>
 
+        <Button
+            android:id="@+id/button_favourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favourites"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

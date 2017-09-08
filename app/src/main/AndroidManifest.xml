@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".AnimeDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".FavouriteActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.mobile.anime.animerecommendations
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     private var testList : ArrayList<Int>? = null
 
+    private var button : Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         swipeViewBuilder.setDisplayViewCount(3)
                 .setSwipeDecor(SwipeDecor().setPaddingTop(0)
                         .setRelativeScale(0.01f))
+
+        button = findViewById(R.id.button_favourites)
+        button!!.setOnClickListener {
+            this.startFavouriteActivity()
+        }
 
         testList = ArrayList()
         testList!!.add(1)
@@ -58,13 +66,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    public fun onAnimeResponse(response: JikanAnimeResponse) {
+    fun onAnimeResponse(response: JikanAnimeResponse) {
         swipeView.addView(AnimeCard(this, swipeView, response))
     }
 
-    public fun startAnimeActivity(anime : JikanAnimeResponse) {
+    fun startAnimeActivity(anime : JikanAnimeResponse) {
         val intent = Intent(this, AnimeDetailsActivity::class.java)
         intent.putExtra(Tags.ANIME, anime)
+        startActivity(intent)
+    }
+
+    fun startFavouriteActivity() {
+        val intent = Intent(this, FavouriteActivity::class.java)
         startActivity(intent)
     }
 
