@@ -1,8 +1,4 @@
-package com.mobile.anime.animerecommendations.service.jikan
-
-/**
- * Created by rww306 on 2017-08-29.
- */
+package com.mobile.anime.animerecommendations.service
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,14 +6,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * Created by rww306 on 2017-06-13.
+ * TODO: Add converter factories for both String and Gson.
  */
 
-object JikanRetrofitBuilder {
-    val JIKAN_API_URL : String = "http://jikan.me"
+class RetrofitBuilder(val baseUrl : String) {
+    val API_URL : String = baseUrl
 
-    val retrofit: Retrofit
-        get() {
+    fun getRetrofit() : Retrofit {
             val httpClient = OkHttpClient.Builder()
             httpClient.addInterceptor { chain ->
                 val original = chain.request()
@@ -37,7 +32,7 @@ object JikanRetrofitBuilder {
             val client = httpClient.build()
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl(JIKAN_API_URL)
+                    .baseUrl(API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

@@ -11,6 +11,7 @@ import com.mindorks.placeholderview.SwipeDecor
 import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.SwipeViewBuilder
 import com.mobile.anime.animerecommendations.service.request.JikanAnimeRequest
+import com.mobile.anime.animerecommendations.service.request.MALGetUserIdRequest
 import com.mobile.anime.animerecommendations.service.response.JikanAnimeResponse
 import com.mobile.anime.animerecommendations.util.Tags
 import com.mobile.anime.animerecommendations.util.clearSharedPref
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         (application as HikariApplication).component!!.inject(this)
         bus.register(this)
+
+        bus.post(MALGetUserIdRequest())
 
         val swipeViewBuilder : SwipeViewBuilder<SwipePlaceHolderView> = swipeView.getBuilder()
         swipeViewBuilder.setDisplayViewCount(3)

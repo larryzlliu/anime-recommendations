@@ -8,11 +8,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-/**
- * Created by rww306 on 2017-06-13.
- */
-
 interface JikanServices {
-    @GET("/api/anime/{id}")
+    @GET("anime/{id}")
     fun getAnimeById(@Path("id") id : Int): Call<JikanAnimeResponse>
 }
